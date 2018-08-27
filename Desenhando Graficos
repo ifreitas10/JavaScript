@@ -1,0 +1,54 @@
+//Desenhando gráficos com função
+
+<canvas width="600" height="400"> </canvas>
+
+<script> 
+    //Criando gráfico de barras de dois anos diferentes
+
+    //cria retangulos
+    function desenhaRetangulo(x, y, largura, altura, cor){
+      pincel.fillStyle = cor;
+      pincel.fillRect(x, y, largura, altura);
+      pincel.strokeStyle = "black";
+      pincel.strokeRect(x, y, largura, altura);
+    }
+
+    //escreve texto na tela
+    function desenhaTexto(texto, x, y){
+      pincel.font = "15px Georgia";
+      pincel.fillStyle = "black";
+      pincel.fillText(texto, x, y);
+    }
+
+    //cria gráfico em barras
+    function desenhaBarra(x, y, serie, cores, texto){
+      desenhaTexto(texto, x, y-10);
+      var altura = 0;
+      var somaAltura = 0;
+
+      //laço para pegar as posições do meu array
+      for (var posicao = 0; posicao < serie.length; posicao++){
+        //serie é a altura do meu retângulo
+        var altura = serie[posicao];
+
+        desenhaRetangulo(x, y+somaAltura, 50, altura, cores[posicao]);			
+        //acumulando a altura do retângulo
+        somaAltura = somaAltura + altura;
+      }
+    }
+
+    //recebe a área dos desenhos
+    var tela = document.querySelector("canvas");
+    //desenhar na área dos desenhos em 2d
+    var pincel = tela.getContext("2d");
+
+    //porcentagens de cada ano
+    var serie2015 = [50, 25, 20, 5];
+    var serie2016 = [65, 20, 13, 2];
+    //cores do gráfico
+    var cores = ["blue", "green", "yellow", "red"];
+
+    desenhaBarra(50, 50, serie2015, cores, "2015");
+    desenhaBarra(150, 50, serie2016, cores, "2016");	
+
+</script>
